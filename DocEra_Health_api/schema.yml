@@ -1,0 +1,1884 @@
+openapi: 3.0.3
+info:
+  title: Your Project API
+  version: 1.0.0
+  description: Your project description
+paths:
+  /appointment/:
+    get:
+      operationId: appointment_list
+      tags:
+      - appointment
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+          description: ''
+    post:
+      operationId: appointment_create
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /appointment/{id}/:
+    get:
+      operationId: appointment_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this appointment.
+        required: true
+      tags:
+      - appointment
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    put:
+      operationId: appointment_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this appointment.
+        required: true
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    patch:
+      operationId: appointment_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this appointment.
+        required: true
+      tags:
+      - appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointment'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+    delete:
+      operationId: appointment_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this appointment.
+        required: true
+      tags:
+      - appointment
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /contact_us/:
+    get:
+      operationId: contact_us_list
+      tags:
+      - contact_us
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactUs'
+          description: ''
+    post:
+      operationId: contact_us_create
+      tags:
+      - contact_us
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactUs'
+          description: ''
+  /contact_us/{id}/:
+    get:
+      operationId: contact_us_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact us.
+        required: true
+      tags:
+      - contact_us
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactUs'
+          description: ''
+    put:
+      operationId: contact_us_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact us.
+        required: true
+      tags:
+      - contact_us
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactUs'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactUs'
+          description: ''
+    patch:
+      operationId: contact_us_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact us.
+        required: true
+      tags:
+      - contact_us
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContactUs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedContactUs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedContactUs'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactUs'
+          description: ''
+    delete:
+      operationId: contact_us_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact us.
+        required: true
+      tags:
+      - contact_us
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /doctor/AvailableTime/:
+    get:
+      operationId: doctor_AvailableTime_list
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AvailableTime'
+          description: ''
+    post:
+      operationId: doctor_AvailableTime_create
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableTime'
+          description: ''
+  /doctor/AvailableTime/{id}/:
+    get:
+      operationId: doctor_AvailableTime_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this available time.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableTime'
+          description: ''
+    put:
+      operationId: doctor_AvailableTime_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this available time.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AvailableTime'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableTime'
+          description: ''
+    patch:
+      operationId: doctor_AvailableTime_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this available time.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAvailableTime'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAvailableTime'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAvailableTime'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableTime'
+          description: ''
+    delete:
+      operationId: doctor_AvailableTime_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this available time.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /doctor/Designation/:
+    get:
+      operationId: doctor_Designation_list
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Designation'
+          description: ''
+    post:
+      operationId: doctor_Designation_create
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Designation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Designation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Designation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Designation'
+          description: ''
+  /doctor/Designation/{id}/:
+    get:
+      operationId: doctor_Designation_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this designation.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Designation'
+          description: ''
+    put:
+      operationId: doctor_Designation_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this designation.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Designation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Designation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Designation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Designation'
+          description: ''
+    patch:
+      operationId: doctor_Designation_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this designation.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDesignation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDesignation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDesignation'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Designation'
+          description: ''
+    delete:
+      operationId: doctor_Designation_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this designation.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /doctor/Review/:
+    get:
+      operationId: doctor_Review_list
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+          description: ''
+    post:
+      operationId: doctor_Review_create
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+  /doctor/Review/{id}/:
+    get:
+      operationId: doctor_Review_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    put:
+      operationId: doctor_Review_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    patch:
+      operationId: doctor_Review_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    delete:
+      operationId: doctor_Review_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /doctor/Specialization/:
+    get:
+      operationId: doctor_Specialization_list
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Specialization'
+          description: ''
+    post:
+      operationId: doctor_Specialization_create
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+  /doctor/Specialization/{id}/:
+    get:
+      operationId: doctor_Specialization_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+    put:
+      operationId: doctor_Specialization_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+    patch:
+      operationId: doctor_Specialization_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+    delete:
+      operationId: doctor_Specialization_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /doctor/list/:
+    get:
+      operationId: doctor_list_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDoctorList'
+          description: ''
+    post:
+      operationId: doctor_list_create
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+  /doctor/list/{id}/:
+    get:
+      operationId: doctor_list_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this doctor.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+    put:
+      operationId: doctor_list_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this doctor.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+    patch:
+      operationId: doctor_list_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this doctor.
+        required: true
+      tags:
+      - doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+    delete:
+      operationId: doctor_list_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this doctor.
+        required: true
+      tags:
+      - doctor
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /patient/list/:
+    get:
+      operationId: patient_list_list
+      tags:
+      - patient
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+          description: ''
+    post:
+      operationId: patient_list_create
+      tags:
+      - patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /patient/list/{id}/:
+    get:
+      operationId: patient_list_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - patient
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+    put:
+      operationId: patient_list_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Patient'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+    patch:
+      operationId: patient_list_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+    delete:
+      operationId: patient_list_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - patient
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /patient/login/:
+    post:
+      operationId: patient_login_create
+      tags:
+      - patient
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /patient/logout/:
+    get:
+      operationId: patient_logout_retrieve
+      tags:
+      - patient
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          description: No response body
+  /patient/register/:
+    post:
+      operationId: patient_register_create
+      tags:
+      - patient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Registration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Registration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Registration'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+          description: ''
+  /service/:
+    get:
+      operationId: service_list
+      tags:
+      - service
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+          description: ''
+    post:
+      operationId: service_create
+      tags:
+      - service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+  /service/{id}/:
+    get:
+      operationId: service_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - service
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    put:
+      operationId: service_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    patch:
+      operationId: service_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    delete:
+      operationId: service_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - service
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          type: string
+          readOnly: true
+        doctor:
+          type: string
+          readOnly: true
+        time:
+          type: string
+          readOnly: true
+        appointment_type:
+          $ref: '#/components/schemas/AppointmentTypeEnum'
+        appointment_status:
+          $ref: '#/components/schemas/AppointmentStatusEnum'
+        symptom:
+          type: string
+        cancel:
+          type: boolean
+      required:
+      - appointment_type
+      - doctor
+      - id
+      - patient
+      - symptom
+      - time
+    AppointmentStatusEnum:
+      enum:
+      - Completed
+      - Pending
+      - Running
+      type: string
+      description: |-
+        * `Completed` - Completed
+        * `Pending` - Pending
+        * `Running` - Running
+    AppointmentTypeEnum:
+      enum:
+      - Offline
+      - Online
+      type: string
+      description: |-
+        * `Offline` - Offline
+        * `Online` - Online
+    AvailableTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        time:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - time
+      - user
+    ContactUs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 40
+        phone:
+          type: string
+          maxLength: 14
+        problem:
+          type: string
+      required:
+      - id
+      - name
+      - phone
+      - problem
+    Designation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 30
+        slug:
+          type: string
+          maxLength: 40
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
+      - name
+      - slug
+    Doctor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        designation:
+          type: array
+          items:
+            type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        available_time:
+          type: array
+          items:
+            type: string
+        image:
+          type: string
+          format: uri
+        fee:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        meet_link:
+          type: string
+          maxLength: 200
+      required:
+      - available_time
+      - designation
+      - fee
+      - id
+      - image
+      - meet_link
+      - specialization
+      - user
+    PaginatedDoctorList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Doctor'
+    PatchedAppointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          type: string
+          readOnly: true
+        doctor:
+          type: string
+          readOnly: true
+        time:
+          type: string
+          readOnly: true
+        appointment_type:
+          $ref: '#/components/schemas/AppointmentTypeEnum'
+        appointment_status:
+          $ref: '#/components/schemas/AppointmentStatusEnum'
+        symptom:
+          type: string
+        cancel:
+          type: boolean
+    PatchedAvailableTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        time:
+          type: string
+          maxLength: 100
+    PatchedContactUs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 40
+        phone:
+          type: string
+          maxLength: 14
+        problem:
+          type: string
+    PatchedDesignation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 30
+        slug:
+          type: string
+          maxLength: 40
+          pattern: ^[-a-zA-Z0-9_]+$
+    PatchedDoctor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        designation:
+          type: array
+          items:
+            type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        available_time:
+          type: array
+          items:
+            type: string
+        image:
+          type: string
+          format: uri
+        fee:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        meet_link:
+          type: string
+          maxLength: 200
+    PatchedPatient:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        mobile_no:
+          type: string
+          maxLength: 14
+    PatchedReview:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        body:
+          type: string
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        rating:
+          $ref: '#/components/schemas/RatingEnum'
+        reviewer:
+          type: integer
+        doctor:
+          type: integer
+    PatchedService:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 20
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+    PatchedSpecialization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 30
+        slug:
+          type: string
+          maxLength: 40
+          pattern: ^[-a-zA-Z0-9_]+$
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        mobile_no:
+          type: string
+          maxLength: 14
+      required:
+      - id
+      - image
+      - mobile_no
+      - user
+    RatingEnum:
+      enum:
+      - ⭐
+      - ⭐⭐
+      - ⭐⭐⭐
+      - ⭐⭐⭐⭐
+      - ⭐⭐⭐⭐⭐
+      type: string
+      description: |-
+        * `⭐` - ⭐
+        * `⭐⭐` - ⭐⭐
+        * `⭐⭐⭐` - ⭐⭐⭐
+        * `⭐⭐⭐⭐` - ⭐⭐⭐⭐
+        * `⭐⭐⭐⭐⭐` - ⭐⭐⭐⭐⭐
+    Registration:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        password:
+          type: string
+          maxLength: 128
+        confirm_password:
+          type: string
+      required:
+      - confirm_password
+      - password
+      - username
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          readOnly: true
+        body:
+          type: string
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        rating:
+          $ref: '#/components/schemas/RatingEnum'
+        reviewer:
+          type: integer
+        doctor:
+          type: integer
+      required:
+      - body
+      - created
+      - doctor
+      - id
+      - rating
+      - reviewer
+      - user
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 20
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+      required:
+      - description
+      - id
+      - image
+      - name
+    Specialization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 30
+        slug:
+          type: string
+          maxLength: 40
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
+      - name
+      - slug
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
