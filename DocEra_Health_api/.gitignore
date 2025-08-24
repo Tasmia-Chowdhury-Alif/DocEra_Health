@@ -1,7 +1,7 @@
 # Python
-# __pycache__/
+__pycache__/
 # *.py[cod]
-# *.sqlite3
+*.sqlite3
 
 # Virtual Environment
 venv-drf/
@@ -13,11 +13,11 @@ env/
 *.env
 
 # Django
-# *.log
-# db.sqlite3
+*.log
+db.sqlite3
 # /media/
 # *.pot
-# *.pyc
+*.pyc
 
 # VS Code
 .vscode/

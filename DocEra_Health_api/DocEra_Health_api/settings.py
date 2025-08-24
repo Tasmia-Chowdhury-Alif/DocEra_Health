@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import dj_database_url 
 import environ
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,11 +29,11 @@ environ.Env.read_env()
 SECRET_KEY = env("SECRET_KEY") 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
-ALLOWED_HOSTS = ["*"]
-
-# CSRF_TRUSTED_ORIGINS = ['*']
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://127.0.0.1","http://localhost:3000"])
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=["http://127.0.0.1", "http://localhost:3000"])
 
 
 # Application definition
@@ -44,8 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
+    # External Packages
+    "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "djoser",
+    "corsheaders",
+    'drf_spectacular',
+    # Internal Apps
     'appointment',
     'contact_us',
     'doctor',
@@ -57,11 +63,16 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
 ]
 
 ROOT_URLCONF = 'DocEra_Health_api.urls'
@@ -87,30 +98,18 @@ WSGI_APPLICATION = 'DocEra_Health_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.parse(
+        env("DATABASE_URL", default="postgres://docera:docera@localhost:5432/docera")
+    )
 }
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions. IsAuthenticated', 
-    # ]
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-}
-
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -164,4 +163,58 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions. IsAuthenticated', 
+    # ]
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=(60*24)),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=4),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+}
+
+
+DJOSER = {
+    "LOGIN_FIELD": "username",
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SEND_ACTIVATION_EMAIL": True,
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "auth/users/activation/{uid}/{token}",
+    "EMAIL": {
+        "activation": "djoser.email.ActivationEmail",
+        "confirmation": "djoser.email.ConfirmationEmail",
+        "password_reset": "djoser.email.PasswordResetEmail",
+        "password_changed_confirmation": "djoser.email.PasswordChangedConfirmationEmail",
+    },
+    "TEMPLATES": {
+        "activation": "email/activation.html",
+        "confirmation": "email/confirmation.html",
+        "password_reset": "email/password_reset.html",
+        "password_changed_confirmation": "email/password_changed_confirmation.html",
+    },
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'DocEra Health API',
+    'DESCRIPTION': 'A clean and reliable backend for a Hospital Management System built with Django REST Framework. It handles patient info, doctor schedules, appointments (online & offline), and secure login with JWT and email verification. Online appointments trigger meet link emails automatically.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    "COMPONENT_SPLIT_REQUEST": True,
+    # OTHER SETTINGS
+}
 
