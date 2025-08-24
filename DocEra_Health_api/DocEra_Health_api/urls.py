@@ -11,7 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     re_path(r'^auth/', include('djoser.urls')),  # /auth/users/, /auth/users/me/
-    re_path(r'^auth/', include('djoser.urls.authtoken')),  # /auth/jwt/create/, etc.
+    re_path(r'^auth/', include('djoser.urls.jwt')),  # /auth/jwt/create/, etc.
 
     path('contact_us/', include('contact_us.urls')),
     path('service/', include('service.urls')),
