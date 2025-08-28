@@ -1,90 +1,68 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from rest_framework import viewsets
-from rest_framework.views import APIView
+from rest_framework import viewsets, status, permissions
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from . import models
 from . import serializers
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes
+from djoser.views import UserViewSet
+from drf_spectacular.utils import extend_schema
 
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.shortcuts import redirect
+
+class IsPatientOrAdmin(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_staff:
+            return True
+        return obj.user == request.user
 
 # Create your views here.
+@extend_schema(
+    summary="List or manage patient profiles",
+    description="Allows authenticated users to view or manage patient profiles. Non-admin users can only access their own profile."
+)
 class PatientViewset(viewsets.ModelViewSet):
     queryset = models.Patient.objects.all()
     serializer_class = serializers.PatientSerializer
+    permission_classes = [IsAuthenticated, IsPatientOrAdmin]
 
+    # only admin users can access all patient objects. others can only access their own object
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return models.Patient.objects.all()
+        return models.Patient.objects.filter(user=self.request.user)
 
-# class RegistrationApiView(APIView):
-#     serializer_class = serializers.RegistrationSerializer
+# TODO : account activation using email
+class PatientRegistrationView(UserViewSet):
+    serializer_class = serializers.PatientRegistrationSerializer
+    permission_classes = []
 
+    @extend_schema(
+        summary="Register a new patient",
+        description="Creates a new patient with associated user account and returns JWT access and refresh tokens.",
+        request=serializers.PatientRegistrationSerializer,
+        responses={
+            201: {
+                "type": "object",
+                "properties": {
+                    "refresh": {"type": "string", "description": "JWT refresh token"},
+                    "access": {"type": "string", "description": "JWT access token"},
+                },
+            },
+        },
+    )
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        patient = serializer.save()
+        user = patient.user
 
-#     def post(self, request):
-#         serializer = self.serializer_class(data= request.data)
-
-#         if serializer.is_valid():
-#             user = serializer.save()
-#             token = default_token_generator.make_token(user)
-#             print("token : ", token)
-#             uid = urlsafe_base64_encode(force_bytes(user.pk))
-#             print("uid : ", uid)
-#             confirm_link = f"http://127.0.0.1:8000/patient/activate/{uid}/{token}"
-#             email_subject = "Smart Care Account Varification"
-#             email_body = render_to_string('patient/confirm_email.html', {"confirm_link" : confirm_link})
-
-#             email = EmailMultiAlternatives(email_subject, '', to=[user.email])
-#             email.attach_alternative(email_body, "text/html")
-#             email.send()
-
-#             return Response("Check your Email for confirmation")
-#         return Response(serializer.errors)
-    
-
-# def activate(request, uid64, token):
-#     try:
-#         uid = urlsafe_base64_decode(uid64).decode()
-#         user = User._default_manager.get(pk= uid)
-#     except(User.DoesNotExist):
-#         user = None
-
-#     if user is not None and default_token_generator.check_token(user, token):
-#         user.is_active = True 
-#         user.save()
-#         return redirect('login')
-#     else :
-#         return redirect('register')
-
-
-# class LoginApiView(APIView):
-#     def post(self, request):
-#         serializer = serializers.UserLoginSerializer(data= self.request.data)
-#         if serializer.is_valid():
-#             username = serializer.validated_data['username']
-#             password = serializer.validated_data['password']
-
-#             user = authenticate(username= username, password= password)
-
-#             if user :
-#                 token, _ = Token.objects.get_or_create(user= user)
-#                 print(token)
-#                 print(_)
-#                 login(request, user= user)
-#                 return Response({'token' : token.key, 'user_id' : user.id})
-#             else :
-#                 return Response({'error' : "Invalid Credential"})
-#         return Response(serializer.errors)
-                
-
-# class LogoutApiView(APIView):
-#     permission_classes = [IsAuthenticated]
-#     def get(self, request):
-#         request.user.auth_token.delete()
-#         logout(request)
-#         return redirect('login')
+        refresh = RefreshToken.for_user(user)
+        return Response(
+            {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            },
+            status=status.HTTP_201_CREATED,
+        )

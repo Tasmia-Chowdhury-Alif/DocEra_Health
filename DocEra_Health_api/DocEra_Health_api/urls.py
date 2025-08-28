@@ -8,11 +8,15 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from patient.views import PatientRegistrationView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     re_path(r'^auth/', include('djoser.urls')),  # /auth/users/, /auth/users/me/
     re_path(r'^auth/', include('djoser.urls.jwt')),  # /auth/jwt/create/, etc.
+
+    path('auth/patients/register/', PatientRegistrationView.as_view({'post': 'create'}), name='patient-register'),
 
     path('contact_us/', include('contact_us.urls')),
     path('service/', include('service.urls')),

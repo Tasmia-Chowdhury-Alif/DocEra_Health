@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'doctor',
     'patient',
     'service',
-    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -71,16 +70,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
 
 ROOT_URLCONF = 'DocEra_Health_api.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,6 +144,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -174,6 +171,7 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions. IsAuthenticated', 
     # ]
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -188,12 +186,16 @@ SIMPLE_JWT = {
 
 DJOSER = {
     "LOGIN_FIELD": "username",
-    "USER_CREATE_PASSWORD_RETYPE": True,
+    "USER_CREATE_PASSWORD_RETYPE": False,
     "SEND_ACTIVATION_EMAIL": True,
     "SEND_CONFIRMATION_EMAIL": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "auth/users/activation/{uid}/{token}",
+    "SERIALIZERS": {
+        "user_create": "patient.serializers.PatientRegistrationSerializer",
+        "user": "patient.serializers.UserSerializer",
+    },
     "EMAIL": {
         "activation": "djoser.email.ActivationEmail",
         "confirmation": "djoser.email.ConfirmationEmail",

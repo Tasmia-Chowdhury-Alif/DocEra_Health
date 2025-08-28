@@ -34,7 +34,7 @@ class AvailableTime(models.Model):
     
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor')
-    image = models.ImageField(upload_to= "doctor/images/")
+    image = models.ImageField(upload_to= "doctors/images/")
     designation = models.ManyToManyField(Designation)
     specialization = models.ManyToManyField(Specialization)
     available_time = models.ManyToManyField(AvailableTime)
