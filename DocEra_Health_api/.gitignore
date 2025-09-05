@@ -1,6 +1,6 @@
 # Python
 __pycache__/
-# *.py[cod]
+*.py[cod]
 *.sqlite3
 
 # Virtual Environment
@@ -14,7 +14,7 @@ env/
 
 # Django
 *.log
-*.sqlite3
+db.sqlite3
 # /media/
 # *.pot
 *.pyc
