@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'drf_spectacular',
     # Internal Apps
+    'core',
     'appointment',
     'contact_us',
     'doctor',
@@ -94,18 +95,18 @@ WSGI_APPLICATION = 'DocEra_Health_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    "default": dj_database_url.parse(
-        env("DATABASE_URL", default="postgres://docera:docera@localhost:5432/docera")
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         env("DATABASE_URL", default="postgres://docera:docera@localhost:5432/docera")
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -192,9 +193,10 @@ DJOSER = {
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "auth/users/activation/{uid}/{token}",
-    "SERIALIZERS": {
-        "user_create": "patient.serializers.PatientRegistrationSerializer",
-        "user": "patient.serializers.UserSerializer",
+    'SERIALIZERS': {
+        'user_create': 'core.serializers.UserCreateSerializer',
+        'user': 'core.serializers.UserSerializer',
+        'current_user': 'core.serializers.UserSerializer',
     },
     "EMAIL": {
         "activation": "djoser.email.ActivationEmail",
@@ -208,6 +210,7 @@ DJOSER = {
         "password_reset": "email/password_reset.html",
         "password_changed_confirmation": "email/password_changed_confirmation.html",
     },
+    "SITE_NAME": "DocEra Health Care",
 }
 
 
