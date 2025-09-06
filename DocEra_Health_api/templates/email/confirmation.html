@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}Your DocEra Health Care account is Activated{% endblocktrans %}
+{% endblock subject %}
+
+{% block html_body %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Account is Activated</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
+    <h1 style="color: #4CAF50;">Account Activated Successfully!</h1>
+    <p>Your DocEra Health Care account has been activated.</p>
+    <p>You can now login to your account.</p>
+    <a href="http://localhost:3000/login"
+        style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+        Go to Login
+    </a>
+</body>
+
+</html>
+{% endblock html_body %}
