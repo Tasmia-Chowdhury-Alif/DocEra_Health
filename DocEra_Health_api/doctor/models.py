@@ -1,45 +1,46 @@
 from django.db import models
 from django.contrib.auth.models import User
 from patient.models import Patient
+from django.core.validators import URLValidator
 
 # Create your models here.
 STAR_CHOICES = [
-    ('⭐', '⭐'),
-    ('⭐⭐', '⭐⭐'),
-    ('⭐⭐⭐', '⭐⭐⭐'),
-    ('⭐⭐⭐⭐', '⭐⭐⭐⭐'),
-    ('⭐⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'),
+    ('⭐', '1'),
+    ('⭐⭐', '2'),
+    ('⭐⭐⭐', '3'),
+    ('⭐⭐⭐⭐', '4'),
+    ('⭐⭐⭐⭐⭐', '5'),
 ]
 
 
 class Designation(models.Model):
     name = models.CharField(max_length= 30)
-    slug = models.SlugField(max_length= 40)
+    slug = models.SlugField(max_length= 40, unique=True)
 
     def __str__(self):
         return self.name 
     
 class Specialization(models.Model):
     name = models.CharField(max_length= 30)
-    slug = models.SlugField(unique=True, max_length= 40)
+    slug = models.SlugField(max_length= 40, unique=True)
 
     def __str__(self):
         return self.name 
     
 class AvailableTime(models.Model):
-    time = models.CharField(unique=True, max_length= 100)
+    time = models.CharField(max_length= 100, unique=True)
 
     def __str__(self):
         return self.time
     
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor')
-    image = models.ImageField(upload_to= "doctors/images/")
+    image = models.ImageField(upload_to= "doctors/images/", null=True, blank=True)
     designation = models.ManyToManyField(Designation)
     specialization = models.ManyToManyField(Specialization)
     available_time = models.ManyToManyField(AvailableTime)
-    fee = models.PositiveIntegerField()
-    meet_link = models.CharField(max_length= 200)
+    fee = models.PositiveIntegerField(null=True, blank=True)
+    meet_link = models.URLField(max_length= 300, validators=[URLValidator()], null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
