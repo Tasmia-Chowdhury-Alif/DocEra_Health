@@ -5,10 +5,10 @@ from . import views
 router = DefaultRouter()
 
 router.register('list', views.DoctorViewset)
-router.register('Designation', views.DesignationViewset)
-router.register('Specialization', views.SpecializationViewset)
-router.register('AvailableTime', views.AvailableTimeViewset)
-router.register('Review', views.ReviewViewset)
+router.register('designations', views.DesignationViewset)
+router.register('specializations', views.SpecializationViewset)
+router.register('available-times', views.AvailableTimeViewset)
+router.register('reviews', views.ReviewViewset)
 
 
 urlpatterns = [
