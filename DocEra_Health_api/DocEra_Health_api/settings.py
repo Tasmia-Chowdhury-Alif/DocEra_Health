@@ -92,21 +92,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'DocEra_Health_api.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# Database configuration
+DATABASE_ENGINE = env.str("DATABASE_ENGINE", default="sqlite").lower()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DATABASE_ENGINE == "postgresql":
+    DATABASES = {
+        "default": dj_database_url.parse(
+            env("DATABASE_URL", default="postgres://docera:docera@localhost:5432/docera")
+        )
     }
-}
-
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         env("DATABASE_URL", default="postgres://docera:docera@localhost:5432/docera")
-#     )
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -131,11 +132,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Dhaka'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -154,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
+# Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
