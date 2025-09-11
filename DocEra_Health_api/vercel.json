@@ -1,0 +1,18 @@
+{
+    "builds": [
+        {
+            "src": "DocEra_Health_api/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.11.3"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "DocEra_Health_api/wsgi.py"
+        }
+    ]
+}
