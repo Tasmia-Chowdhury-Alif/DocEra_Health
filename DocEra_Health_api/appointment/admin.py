@@ -7,17 +7,17 @@ from django.shortcuts import redirect
 
 # Register your models here.
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ['doctor_name', 'patient_name', 'appointment_type', 'appointment_status', 'symptom', 'time', 'cancel']
+    list_display = ['doctor_name', 'patient_name', 'appointment_type', 'appointment_status', 'payment_status', 'stripe_session_id', 'payment_intent_id', 'symptom', 'time', 'cancel']
 
     def doctor_name(self, obj):
-        return obj.doctor.user.first_name
+        return obj.doctor.user.first_name or 'N/A'
 
     def patient_name(self, obj):
-        return obj.patient.user.first_name
+        return obj.patient.user.first_name or 'N/A'
     
     def save_model(self, request, obj, form, change):
         if obj.appointment_type == "Online" and obj.appointment_status == "Running" :
-            email_subject = "Yor Online Appointment is Running"
+            email_subject = "Your Online Appointment is Running"
             email_body = render_to_string('./appointment/appointment_email.html', {"user" : obj.patient.user, "doctor" : obj.doctor})
 
             email = EmailMultiAlternatives(email_subject, '', to=[obj.patient.user.email])
