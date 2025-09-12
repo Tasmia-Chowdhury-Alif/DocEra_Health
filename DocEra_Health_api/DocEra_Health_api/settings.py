@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "djoser",
     "corsheaders",
-    'drf_spectacular',
+    "django_filters",
+    "drf_spectacular",
     # Internal Apps
     'core',
     'appointment',
@@ -165,6 +166,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
+
+# Stripe congiguration
+STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY") 
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY") 
+STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET") 
 
 
 REST_FRAMEWORK = {
